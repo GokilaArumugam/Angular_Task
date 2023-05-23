@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\repos\\Todo-List\\API\\API_TASK2.csproj": {}
+    "D:\\repos\\Angular_Task\\Api\\API_TASK2.csproj": {}
   },
   "projects": {
-    "D:\\repos\\Todo-List\\API\\API_TASK2.csproj": {
+    "D:\\repos\\Angular_Task\\Api\\API_TASK2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\Todo-List\\API\\API_TASK2.csproj",
+        "projectUniqueName": "D:\\repos\\Angular_Task\\Api\\API_TASK2.csproj",
         "projectName": "API_TASK2",
-        "projectPath": "D:\\repos\\Todo-List\\API\\API_TASK2.csproj",
+        "projectPath": "D:\\repos\\Angular_Task\\Api\\API_TASK2.csproj",
         "packagesPath": "C:\\Users\\Gokila\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\Todo-List\\API\\obj\\",
+        "outputPath": "D:\\repos\\Angular_Task\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
 import { RegisterModel } from 'src/app/Models/registerModel';
@@ -23,6 +23,8 @@ faEnvelope=faEnvelope;
 faEyeSlash=faEyeSlash;
 faLock=faLock;
 hide=true;
+@ViewChild('myModal') public myModal;
+
 
   constructor(private authService: AuthService,private route:Router,private toastr:ToastrService) { }
  ngOnInit() {
@@ -41,6 +43,7 @@ hide=true;
      ( res:any)=>{
         this.toastr.success("Change Profile Successful");
         localStorage.setItem("loggedInUser",JSON.stringify(this.updateModel));
+        this.myModal.hide();
       },
       (err)=>{
         this.toastr.error("Provided Email Not Found");

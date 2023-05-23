@@ -11,5 +11,6 @@ namespace API_TASK2.Models
         public DbSet<User_Registration>register{ get; set; }
         public DbSet<User_Login> login { get; set; }
         public DbSet<TaskModel> tasks { get ; set; }
+        
     }
 }

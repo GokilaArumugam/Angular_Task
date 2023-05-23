@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "biDLEiPG1VVzpTpxeynzWcrQB8Bu5FpLnNib6so0pfEUsebG0kleQklZ0jDVbJaDqTz1PrCIMM1E1CIs2EwMRQ==",
+  "dgSpecHash": "VSbq0SG3HmfAouvr4wlc3y1vDlNvd6t6uwUn+DZL734/m8omXW33GY0jKEgnesMPmRi1x/iQKS+9588+pdtE9Q==",
   "success": true,
-  "projectFilePath": "D:\\repos\\Todo-List\\API\\API_TASK2.csproj",
+  "projectFilePath": "D:\\repos\\Angular_Task\\Api\\API_TASK2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gokila\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Gokila\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

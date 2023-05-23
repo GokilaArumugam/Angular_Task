@@ -23,7 +23,10 @@
                 <option   value="Completed">Completed</option>
                </select>
             </div>
-            <button type="submit" class="btn btn-success mt-2">Add Task</button>
+            <div class="text-center">
+                    <button type="submit" class="btn btn-success mt-2">Add Task</button>
+            </div>
+            
         </form>
       </div>
       
@@ -32,27 +35,34 @@
             <h2>Task List</h2>
             <div class="row">
                 <div class="col-3">
-                     <input type="text" [(ngModel)]="searchText" class="form-control me-2" />
+                     <input type="text" [(ngModel)]="querryModel.description" class="form-control ms-1" placeholder="Description" />
                 </div>
                 <div class="col-3">
-                    <input type="text" [(ngModel)]="searchText" class="form-control me-2" />
+                    <input type="date" [(ngModel)]="querryModel.date" class="form-control" placeholder="Date"/>
                 </div>
                 <div class="col-3">
-                    <input type="text" [(ngModel)]="searchText" class="form-control me-2" />
+                    <select name="status" [(ngModel)]="querryModel.status" class="form-control" >
+                        <option value="Open">Open</option>
+                        <option value="Completed">Completed</option>
+                    </select>
                 </div>
-                <div class="col-2">
-                    <button type="submit" class="btn btn-secondary" (click)="getAll()">Submit</button>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-secondary me-2" (click)="getAll()">Search</button>
+                    <button class="btn btn-danger" (click)="clear()">Clear</button>
                 </div>
-                <div class="col-1">
-                          <span><fa-icon  [icon]="faDeleteLeft"></fa-icon></span>
-                </div>
+                
             </div>
            
                 <table class="table mt-2">
                     <thead class="table-secondary text-center">
                         <tr>
-                            <th>Description &nbsp;<fa-icon [icon]="faSort"></fa-icon></th>
-                            <th>Date</th>
+                            <th>Description &nbsp;<fa-icon [icon]="faArrowDownAZ"
+                                 (click)="sorting('description',false)"></fa-icon>
+                            <fa-icon [icon]="faArrowUpAZ"
+                            (click)="sorting('description',true)"></fa-icon></th>
+
+                            <th>Date&nbsp;<fa-icon [icon]="faArrowDown19" (click)="sorting('date',false)"></fa-icon>
+                            <fa-icon [icon]="faArrowUp19" (click)="sorting('date',true)"></fa-icon></th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -74,7 +84,7 @@
                             </td>
                         </tr>
                     </tbody>
-                    <pagination-controls></pagination-controls>
+                    
                 </table>
         </div>
             
@@ -99,26 +109,27 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Description</label>
-                    <input type="text" name="Description" [(ngModel)]="task.description" class="form-control">
+                    <input type="text" name="Description" [(ngModel)]="updatetask.description" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Date</label>
-                    <input type="date" name="date" [(ngModel)]="task.date" class="form-control">
+                    <input type="date" name="date" [(ngModel)]="updatetask.date" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Status</label>
                     <!--  <input type="text" name="Description" [(ngModel)]="task.status" class="form-control"> -->
                 
-                    <select name="status" [(ngModel)]="task.status" class="form-control">
+                    <select name="status" [(ngModel)]="updatetask.status" class="form-control">
                         <option value="Open">Open</option>
                         <option value="Complete">Completed</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-success mt-2" (click)="SubmitUpdateTask()">Update Task</button>
+               
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
+                <button type="submit" class="btn btn-success me-2" (click)="SubmitUpdateTask()">Update Task</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
 

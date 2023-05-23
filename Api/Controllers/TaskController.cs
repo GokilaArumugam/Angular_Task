@@ -17,15 +17,60 @@ namespace API_TASK2.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskModel>>> GetTasks(string? searchText)
-        {
-            
-                if (searchText != "null" && searchText != null)
+        public async Task<ActionResult<IEnumerable<TaskModel>>> GetTasks(string? description = null,
+            DateTime? date=null,string? status=null,string? sortby=null,bool isDesc=false)
+     {
+            List<TaskModel> tasks = _dbContext.tasks.ToList();
+            if (description != null)
+            {
+               tasks= await  _dbContext.tasks.Where(m => m.Description.ToLower() == description.ToLower()).ToListAsync();
+            }
+            if(date != null)
+            {
+                tasks = await _dbContext.tasks.Where(m=>m.Date==date).ToListAsync();
+            }
+            if (status != null)
+            {
+                tasks= await _dbContext.tasks.Where(m => m.Status.ToLower() == status.ToLower())
+                    .ToListAsync();
+            }
+            if (isDesc==true)
+            {
+                if (sortby == "description")
                 {
-                    return await _dbContext.tasks.Where(m => m.Description.ToLower() == searchText.ToLower()
-                   || m.Date.ToString() == searchText || m.Status.ToLower() == searchText.ToLower()).ToListAsync();
+                    tasks = tasks.OrderByDescending(m => m.Description).ToList();
                 }
-            return await _dbContext.tasks.ToListAsync();
+                else
+                {
+                    tasks = tasks.OrderByDescending(m => m.Date).ToList();
+                }
+            }
+            else
+            {
+                if (sortby == "description")
+                {
+                    tasks = tasks.OrderBy(m => m.Description).ToList();
+                }
+                else
+                {
+                    tasks = tasks.OrderBy(m => m.Date).ToList();
+                }
+            }
+            return tasks;
+        }
+        [HttpGet("[action]")]
+        public IActionResult GetAlldesc()
+        {
+            try
+            {
+                var sort = _dbContext.tasks.OrderByDescending(m => m.Description).ThenByDescending(m=>m.Status).ToList();
+                return Ok(sort);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return NotFound();
         }
 
         [HttpGet("{id}")]
@@ -42,6 +87,15 @@ namespace API_TASK2.Controllers
             }
             return await _dbContext.tasks.ToListAsync();
         }
+        //public IActionResult paging(int page,int pageSize) 
+        //{
+        //    if (page <= 1)
+        //    {
+        //        page = 0;
+        //    }
+        //  int totalpaged=page*pageSize;
+        //    return GetTasks().Skip(totalpaged).Take(pageSize).ToList();
+        //}
 
         [HttpPost("[action]")]
         public async Task<ActionResult<TaskModel>> PostTask(TaskModel task)
