@@ -1,0 +1,144 @@
+<div class="container-fluid p-5">
+   <div class="row">
+      <div class="col-4 jumbotron" style="border-radius: 10px;">
+        <form #f="ngForm" name="form" (ngSubmit)="onSubmit(f)" class="w-100 mt-4">
+            <h2>Add Task</h2>
+            <!-- <div class="form-group">
+                <input type="hidden" name="id" [(ngModel)]="task.id" class="form-control">
+            </div> -->
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text"  name="Description" [(ngModel)]="task.description" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="date" [(ngModel)]="task.date" class="form-control">
+            </div>
+            <div class="form-group" >
+                <label>Status</label>
+               <!--  <input type="text" name="Description" [(ngModel)]="task.status" class="form-control"> -->
+
+               <select name="status" [(ngModel)]="task.status" class="form-control">
+                <option  value="Open">Open</option>
+                <option   value="Completed">Completed</option>
+               </select>
+            </div>
+            <button type="submit" class="btn btn-success mt-2">Add Task</button>
+        </form>
+      </div>
+      
+      <div class="col-8">
+        <div class="card mt-4">
+            <h2>Task List</h2>
+            <div class="row">
+                <div class="col-3">
+                     <input type="text" [(ngModel)]="searchText" class="form-control me-2" />
+                </div>
+                <div class="col-3">
+                    <input type="text" [(ngModel)]="searchText" class="form-control me-2" />
+                </div>
+                <div class="col-3">
+                    <input type="text" [(ngModel)]="searchText" class="form-control me-2" />
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-secondary" (click)="getAll()">Submit</button>
+                </div>
+                <div class="col-1">
+                          <span><fa-icon  [icon]="faDeleteLeft"></fa-icon></span>
+                </div>
+            </div>
+           
+                <table class="table mt-2">
+                    <thead class="table-secondary text-center">
+                        <tr>
+                            <th>Description &nbsp;<fa-icon [icon]="faSort"></fa-icon></th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr *ngFor="let user of usersList">
+                            <td>{{user.description}}</td>
+                            <td>{{user.date|date:'dd-MM-yyyy'}}</td>
+                            <td><ng-container [ngSwitch]="user.status">
+                                    <p *ngSwitchCase="'Open'" class="badge bg-danger">Open</p>
+                                    <p *ngSwitchCase="'Completed'" class="badge bg-success">Completed</p>
+                            </ng-container>
+                                
+                            </td>
+                            <td style="cursor:pointer;"><fa-icon (click)="edit(user)" [icon]="faEdit" class="icon-green"
+                                    data-bs-toggle="modal" data-bs-target="#myUModal"></fa-icon>
+                                <fa-icon (click)="delete(user)" [icon]="faTrashAlt" class="icon-red ms-3"></fa-icon>
+                                <!-- <fa-icon class="icon-blue ms-3" [icon]="faUser"></fa-icon> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                    <pagination-controls></pagination-controls>
+                </table>
+        </div>
+            
+      </div>
+      </div>
+   </div>
+
+
+
+
+<div class="modal" id="myUModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update Task</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" name="Description" [(ngModel)]="task.description" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" name="date" [(ngModel)]="task.date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <!--  <input type="text" name="Description" [(ngModel)]="task.status" class="form-control"> -->
+                
+                    <select name="status" [(ngModel)]="task.status" class="form-control">
+                        <option value="Open">Open</option>
+                        <option value="Complete">Completed</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success mt-2" (click)="SubmitUpdateTask()">Update Task</button>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-dark fixed-top">
+        <div class="container-fluid d-flex">
+            <div class="nav-content d-flex w-100 justify-content-between">
+               <h1 class="navbar-brand font-weight-bolder" id="nav_head">TODO List Manager</h1>
+            </div>
+            <button *ngIf="!loggedInUser"  type="button" class="btn btn-primary"  routerLink="../../authentication/login">Login</button>
+            <button *ngIf="!loggedInUser" type="button" class="btn btn-outline-success" routerLink="../../authentication/registration">Register</button>
+                
+                <div class="dropdown" *ngIf="loggedInUser">
+                    <p class="dropdown-toggle" data-bs-toggle="dropdown" >
+                        {{ loggedInUser?.name}}
+                    </p>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#myModal">Update Profile</a></li>
+                        <li><a class="dropdown-item" href="#" (click)="LogOut()">LogOut</a></li>
+                    </ul>
+                </div>
+            </div>
+    </nav>
+    
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Profile</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+               
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form>
+                            <label class="form-label"><strong>Name</strong></label>
+                            <div class="input-group">
+                                <a class="input-group-text">
+                                    <fa-icon [icon]="faUser"></fa-icon>
+                                </a>
+                                <input type="text" class="form-control" placeholder="Enter Name" name="name" required #NameInput="ngModel"
+                                    [(ngModel)]="updateModel.name" />
+                            </div>
+                            <div *ngIf="NameInput.invalid &&(NameInput.dirty||NameInput.touched)">
+                                <small *ngIf="NameInput.errors?.['required']">The Name is required</small>
+                                <small *ngIf="NameInput.errors?.['maxlength']"> Name must be maximum of 2 characters</small>
+                            </div>
+                            <label class="form-label"><strong>Age</strong></label>
+                            <div class="input-group">
+                                <a class="input-group-text">
+                                    <fa-icon [icon]="faCalendar"></fa-icon>
+                                </a>
+                                <input type="number" class="form-control" placeholder="Enter age" name="age" required email #ageInput="ngModel"
+                                    [(ngModel)]="updateModel.age" />
+                            </div>
+                            <div *ngIf="ageInput.invalid &&(ageInput.dirty||ageInput.touched)">
+                                <small *ngIf="ageInput.errors?.['required']">The Age is required</small>
+                            </div>
+                            <label class="form-label"><strong>Email</strong></label>
+                            
+                            <div class="input-group">
+                                <a class="input-group-text">
+                                    <fa-icon [icon]="faEnvelope"></fa-icon>
+                                </a>
+                                <input type="email" class="form-control" placeholder="Enter email" name="UserName" required email
+                                    #UserNameInput="ngModel" [(ngModel)]="updateModel.email" />
+                            </div>
+                            
+                            <div *ngIf="UserNameInput.invalid &&(UserNameInput.dirty||UserNameInput.touched)">
+                                <small *ngIf="UserNameInput.errors?.['required']">The Email is required</small>
+                                <small *ngIf="UserNameInput.errors?.['email']">Enter a valid email</small>
+                            </div>
+                            
+                            <label class="form-label mt-3"><strong>Password</strong></label><br>
+                            <div class="input-group">
+                                <a class="input-group-text">
+                                    <fa-icon [icon]="faLock"></fa-icon>
+                                </a>
+                                <input [type]="hide ? 'password' : 'text'" class="form-control" type="password" id="pass" placeholder="Password"
+                                    name="Password" required minlength="6" maxlength="15" #passwordInput="ngModel"
+                                    [(ngModel)]="updateModel.password" />
+                                <a class="input-group-text ">
+                                    <fa-icon [icon]="hide ? faEye : faEyeSlash" (click)="hide = !hide" style="cursor: pointer"></fa-icon>
+                                </a>
+                            </div>
+                            <div *ngIf="passwordInput.invalid &&(passwordInput.dirty||passwordInput.touched)">
+                                <small *ngIf="passwordInput.errors?.['required']">The Password is required</small>
+                                <small *ngIf="passwordInput.errors?.['maxlength']"> Password must be maximum of 15 characters</small>
+                                <small *ngIf="passwordInput.errors?.['minlength']"> Password must be minimum of 8 characters</small>
+                            </div>
+                            
+                    </form>
+                    
+                </div>
+    
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-success me-2" (click)="OnSubmit()">Update</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+   
+     
+    
+
+
+   

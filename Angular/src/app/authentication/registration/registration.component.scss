@@ -1,0 +1,31 @@
+.container {
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 15px;
+    border-color: #277582;
+    font-family: 'Arial';
+    background-color: aliceblue;
+}
+
+h2 {
+    text-align: center;
+    color: #277582;
+    padding: 20px;
+}
+
+label {
+    color: black;
+    font-size: 17px;
+}
+
+input.ng-invalid.ng-touched {
+    border-color: red 1px solid;
+}
+
+small {
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+}
+
